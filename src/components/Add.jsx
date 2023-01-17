@@ -1,6 +1,6 @@
 import { Tooltip, Fab, Modal, Box, Typography, Button, Avatar, TextField } from "@mui/material"
 import React, { useState } from "react"
-import { Add as AddIcon, InsertEmoticon, } from '@mui/icons-material'
+import { Add as AddIcon, InsertEmoticon, PersonAdd, VideoCameraBack, Image } from '@mui/icons-material'
 import styled from "@emotion/styled"
 import { Stack } from "@mui/system"
 
@@ -15,19 +15,18 @@ const Add = () => {
     const [open, setOpen] = useState(false)
     return (
         <>
-            <Tooltip title="Delete" sx={{
+            <Tooltip title="Add" sx={{
                 position: "fixed",
                 bottom: "20px",
                 left: { xs: "calc(50% - 25px)", md: "30px" }
             }}>
                 <Fab color="primary" aria-label="add">
-                    <AddIcon />
+                    <AddIcon onClick={() =>setOpen(true)}/>
                 </Fab>
             </Tooltip>
-            <Button onClick={() => { setOpen(true) }}>Open modal</Button>
             <Modal
                 open={open}
-                onClose={() => { setOpen(false) }}
+                onClose={() =>setOpen(false)}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
                 sx={{
@@ -35,7 +34,7 @@ const Add = () => {
                     alignItems: "center"
                 }}
             >
-                <Box width={400} height={280} bgcolor="white" p={3} borderRadius={5}><Typography variant="h6" color="grey" textAlign="center">Create post</Typography>
+                <Box width={400} height={280} bgcolor={"background.default"} color={"text.primary"} p={3} borderRadius={5}><Typography variant="h6" color="grey" textAlign="center">Create post</Typography>
                     <UserBox>
                         <Avatar src="https://material-ui.com/static/images/avatar/2.jpg" alt="john" />
                         <Typography>John Doe</Typography>
@@ -48,9 +47,15 @@ const Add = () => {
                         rows={3}
                         variant="standard"
                     />
-                    <Stack>
-                        <InsertEmoticon/>
+                    <Stack direction="row" gap={1} mt={2} mb={3}>
+                        <InsertEmoticon color="primary"/>
+                        <Image color="secondary"/>
+                        <VideoCameraBack color="success"/>
+                        <PersonAdd color="error"/>
                     </Stack>
+                    <Button sx={{display:"flex", justifyContent:"center", alignItems:"center"}} variant="contained">
+                        POST
+                    </Button>
                 </Box>
             </Modal>
         </>
